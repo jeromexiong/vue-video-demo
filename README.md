@@ -1,5 +1,8 @@
 # videotest
 
+### 效果图
+![mp4_hls_rtmp.png](./mp4_hls_rtmp.png)
+
 ## Project setup
 ```
 npm install
