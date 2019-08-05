@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    <video1 />
+    <video3 />
+    <video5 />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import video1 from './components/01-video.vue'
+import video3 from './components/03-video.vue'
+import video5 from './components/05-video.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    video1,
+    video3,
+    video5,
   }
 }
 </script>
