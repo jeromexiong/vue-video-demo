@@ -1,7 +1,8 @@
 <template>
   <div class="player">
     <div class="md-subhead">
-      <span>rtmp流播放 & 自定义hotkeys</span>
+      <span>{{isRTMP ? 'rtmp' : 'flv'}}流播放 & 自定义hotkeys</span>
+      <button @click="switchSource">切换</button>
     </div>
     <video-player
       playsinline
@@ -20,6 +21,7 @@ import "videojs-hotkeys";
 export default {
   data() {
     return {
+      isRTMP: true,
       playerOptions: {
         //playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
         autoplay: true, //如果true,浏览器准备好时开始回放。
@@ -36,20 +38,20 @@ export default {
         sources: [
           {
             type: "rtmp/mp4",
-            src: "rtmp://58.200.131.2:1935/livetv/hunantv"
-          }
+            src: "rtmp://58.200.131.2:1935/livetv/hunantv",
+          },
         ],
         techOrder: ["flash", "html5"],
         // poster: "poster.jpg", //你的封面地址
         width: document.documentElement.clientWidth,
-        notSupportedMessage: "此视频暂无法播放，请稍后再试" //允许覆盖Video.js无法播放媒体源时显示的默认信息。
-        //  controlBar: {
+        notSupportedMessage: "此视频暂无法播放，请稍后再试", //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+        // controlBar: {
         //   timeDivider: true,
         //   durationDisplay: true,
         //   remainingTimeDisplay: false,
-        //   fullscreenToggle: true //全屏按钮
-        //  }
-      }
+        //   fullscreenToggle: true, //全屏按钮
+        // },
+      },
     };
   },
   methods: {
@@ -62,13 +64,29 @@ export default {
         volumeStep: 0.1,
         seekStep: 5,
         enableModifiersForNumbers: false,
-        fullscreenKey: function(event, player) {
+        fullscreenKey: function (event, player) {
           // override fullscreen to trigger when pressing the F key or Ctrl+Enter
           return event.which === 70 || (event.ctrlKey && event.which === 13);
-        }
+        },
       });
-    }
-  }
+    },
+    switchSource() {
+      this.isRTMP = !this.isRTMP;
+      this.playerOptions.sources = this.isRTMP
+        ? [
+            {
+              type: "rtmp/mp4",
+              src: "rtmp://58.200.131.2:1935/livetv/hunantv",
+            },
+          ]
+        : [
+            {
+              type: "video/x-flv",
+              src: "http://img.ksbbs.com/asset/Mon_1704/15868902d399b87.flv",
+            },
+          ];
+    },
+  },
 };
 </script>
 
